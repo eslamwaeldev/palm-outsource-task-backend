@@ -1,0 +1,30 @@
+{
+  "name": "plasma-outsource-task-backend",
+  "version": "1.0.0",
+  "description": "Plasma outsource backend interview task",
+  "main": "./src/index.ts",
+  "author": "Eslam Wael",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon",
+    "build": "tsc ./src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.21",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.0",
+    "prettier-plugin-prisma": "^5.0.0",
+    "prisma": "^6.10.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
