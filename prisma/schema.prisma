@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -15,10 +14,19 @@ datasource db {
 }
 
 model Exercise {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   imgSrc      String
   duration    String
   repsNo      String
   description String
+  Mood        Mood?   @relation(fields: [moodId], references: [id])
+  moodId      String? @db.ObjectId
+}
+
+model Mood {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String     @unique
+  imgSrc    String
+  exercises Exercise[]
 }
