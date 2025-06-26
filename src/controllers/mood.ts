@@ -87,6 +87,7 @@ export const postAddMood = async (req: Request, res: Response) => {
 
 export const postMoodExercise = async (req: Request, res: Response) => {
   const { mood, energy, notes } = req.body;
+
   try {
     const currentMode = await prisma.mood.findUniqueOrThrow({
       where: {
@@ -104,15 +105,16 @@ export const postMoodExercise = async (req: Request, res: Response) => {
       Math.random() * currentMode.exercises.length,
     );
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "POST, OPTIONS");
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept",
     );
     res.status(200).json({
-      suggestions: [
-        `${currentMode.exercises[exerciseIndex]}`,
-        `Try doing it ${energy} times to match your energy`,
-      ],
+      suggestions: {
+        exercise: currentMode.exercises[exerciseIndex],
+        suggestion: `Try doing it ${energy} times to match your energy`,
+      },
     });
   } catch (error) {
     res.status(422).json({
