@@ -1,9 +1,5 @@
 import { Router } from "express";
-import {
-  getAllExercise,
-  postAddExercise,
-  postMoodExercise,
-} from "../controllers/exercise.ts";
+import { getAllExercise, postAddExercise } from "../controllers/exercise.ts";
 
 const exerciseRouter = Router();
 
@@ -13,7 +9,5 @@ exerciseRouter.get("/", getAllExercise);
 //Post Requests
 
 exerciseRouter.post("/", postAddExercise);
-
-exerciseRouter.post("/mood", postMoodExercise);
 
 export default exerciseRouter;
