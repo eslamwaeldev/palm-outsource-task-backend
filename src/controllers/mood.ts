@@ -9,6 +9,11 @@ export const getAllMoods = async (req: Request, res: Response) => {
     });
     return;
   }
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+  );
   res.status(200).json({
     data: allMoods,
   });
@@ -25,6 +30,11 @@ export const getMood = async (req: Request, res: Response) => {
         exercises: true,
       },
     });
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept",
+    );
     res.status(200).json({
       data: mood,
     });
@@ -64,7 +74,11 @@ export const postAddMood = async (req: Request, res: Response) => {
       exercises: true,
     },
   });
-
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+  );
   res.status(200).json({
     message: "Mood created Successfully",
     data: addedMood,
@@ -82,15 +96,18 @@ export const postMoodExercise = async (req: Request, res: Response) => {
         exercises: true,
       },
     });
-    console.log("🚀 ~ postMoodExercise ~ currentMode:", currentMode);
+
     if (!currentMode.exercises) {
       throw new Error("This mode has no exercises");
     }
     const exerciseIndex = Math.floor(
       Math.random() * currentMode.exercises.length,
     );
-    console.log("🚀 ~ postMoodExercise ~ exerciseIndex:", exerciseIndex);
-
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept",
+    );
     res.status(200).json({
       suggestions: [
         `${currentMode.exercises[exerciseIndex]}`,
