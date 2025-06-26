@@ -15,7 +15,10 @@ config();
 const app = express();
 
 //body parser init
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// parse various different custom JSON types as JSON
+app.use(bodyParser.json());
 
 // Init static file
 const __filename = fileURLToPath(import.meta.url);
