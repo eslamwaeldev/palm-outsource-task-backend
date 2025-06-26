@@ -1,7 +1,7 @@
 {
-  "name": "plasma-outsource-task-backend",
+  "name": "palm-outsource-task-backend",
   "version": "1.0.0",
-  "description": "Plasma outsource backend interview task",
+  "description": "Palm outsource backend interview task",
   "main": "./src/index.ts",
   "author": "Eslam Wael",
   "license": "MIT",
@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@prisma/client": "^6.10.1",
+    "@types/cors": "^2.8.19",
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-validator": "^7.2.1"
