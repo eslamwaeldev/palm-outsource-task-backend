@@ -6,6 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import exerciseRouter from "./routes/exerciseRouter.ts";
 import { getError } from "./controllers/error.ts";
+import moodRouter from "./routes/moodRouter.ts";
 
 //dotenv init
 config();
@@ -25,6 +26,9 @@ const port = process.env.PORT;
 
 //Exercise route handler
 app.use("/api/exercise", exerciseRouter);
+
+//Mood Route handler
+app.use("/api/mood", moodRouter);
 
 //Error handler
 app.use(getError);
