@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import exerciseRouter from "./routes/exerciseRouter.ts";
 import { getError } from "./controllers/error.ts";
 import moodRouter from "./routes/moodRouter.ts";
+import cors from "cors";
 
 //dotenv init
 config();
@@ -26,6 +27,8 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 const port = process.env.PORT;
+
+app.use(cors());
 
 //Exercise route handler
 app.use("/api/exercise", exerciseRouter);
