@@ -4,6 +4,8 @@ import { config } from "dotenv";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import exerciseRouter from "./routes/exerciseRouter.ts";
+import { getError } from "./controllers/error.ts";
 
 //dotenv init
 config();
@@ -21,6 +23,12 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 
 const port = process.env.PORT;
 
+//Exercise route handler
+app.use("/api/exercise", exerciseRouter);
+
+//Error handler
+app.use(getError);
+
 app.listen(port, () => {
-  console.log(`Server is running on port: ${port} at http://localhost:${port}`);
+  log(`Server is running on port: ${port} at http://localhost:${port}`);
 });
