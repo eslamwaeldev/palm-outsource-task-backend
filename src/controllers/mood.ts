@@ -17,9 +17,12 @@ export const getAllMoods = async (req: Request, res: Response) => {
 export const getMood = async (req: Request, res: Response) => {
   const { moodName } = req.params;
   try {
-    const mood = prisma.mood.findUniqueOrThrow({
+    const mood = await prisma.mood.findUniqueOrThrow({
       where: {
         name: moodName,
+      },
+      include: {
+        exercises: true,
       },
     });
     res.status(200).json({
@@ -36,20 +39,29 @@ export const getMood = async (req: Request, res: Response) => {
 export const postAddMood = async (req: Request, res: Response) => {
   const { name, imgSrc, exercises } = req.body;
 
-  const moodExercises = exercises.map(async (exercise: string) => {
-    const foundExercise = await prisma.exercise.findUniqueOrThrow({
-      where: {
-        id: exercise,
+  const foundExercises = await prisma.exercise.findMany({
+    where: {
+      id: {
+        in: exercises,
       },
-    });
-    return foundExercise;
+    },
   });
+  if (foundExercises.length !== exercises.length) {
+    res.status(422).json({
+      error: "Some of the exercises are not found",
+    });
+  }
 
   const addedMood = await prisma.mood.create({
     data: {
       imgSrc: imgSrc,
       name: name,
-      exercises: moodExercises,
+      exercises: {
+        connect: exercises.map((id: string) => ({ id })),
+      },
+    },
+    include: {
+      exercises: true,
     },
   });
 
@@ -70,12 +82,14 @@ export const postMoodExercise = async (req: Request, res: Response) => {
         exercises: true,
       },
     });
+    console.log("🚀 ~ postMoodExercise ~ currentMode:", currentMode);
     if (!currentMode.exercises) {
       throw new Error("This mode has no exercises");
     }
     const exerciseIndex = Math.floor(
       Math.random() * currentMode.exercises.length,
     );
+    console.log("🚀 ~ postMoodExercise ~ exerciseIndex:", exerciseIndex);
 
     res.status(200).json({
       suggestions: [
