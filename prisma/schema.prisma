@@ -6,10 +6,19 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model Exercise {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  imgSrc      String
+  duration    String
+  repsNo      String
+  description String
 }
