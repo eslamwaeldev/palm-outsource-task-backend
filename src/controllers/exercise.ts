@@ -16,7 +16,6 @@ export const getAllExercise = async (req: Request, res: Response) => {
 
 export const postAddExercise = async (req: Request, res: Response) => {
   const { name, imgSrc, description } = req.body;
-  console.log("🚀 ~ postAddExercise ~ body:", req.body);
 
   const createdExercise = await prisma.exercise.create({
     data: {
